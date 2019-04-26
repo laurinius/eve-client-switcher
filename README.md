@@ -1,5 +1,5 @@
 ---
-#EVE Client Switcher -
+# EVE Client Switcher
 ---
 created by Laurinius
 
