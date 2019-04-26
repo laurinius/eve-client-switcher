@@ -1,7 +1,4 @@
----
 # EVE Client Switcher
----
-created by Laurinius
 
 1 - About EVE Client Switcher
 ----------------------
@@ -23,8 +20,8 @@ With EVE Client Switcher you switch directly between EVE clients or minimize all
 2 - Requirements
 ----------------
 - EVE clients running in "Fixed Window" or "Window Mode" (designed for "Fixed Window")
+- Windows 7/8/10
 - .NET Framework is required
-(tested with .NET 4.5.1 on Windows 7)
 
 3 - Usage
 ---------
