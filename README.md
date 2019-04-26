@@ -1,5 +1,7 @@
 # EVE Client Switcher
 
+[Download](EveClientSwitcher.zip?raw=true)
+
 1 - About EVE Client Switcher
 ----------------------
 EVE Client Switcher lets you switch between your EVE client windows or minimize all client windows at once with simple hotkeys.
