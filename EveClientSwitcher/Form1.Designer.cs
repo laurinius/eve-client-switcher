@@ -36,17 +36,12 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.currentKeyLabel = new System.Windows.Forms.Label();
-            this.keyComboBox = new System.Windows.Forms.ComboBox();
-            this.controlKeyCheckBox = new System.Windows.Forms.CheckBox();
-            this.shiftKeyCheckBox = new System.Windows.Forms.CheckBox();
-            this.altKeyCheckBox = new System.Windows.Forms.CheckBox();
+            this.keyTextBox = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.currentKeyMinLabel = new System.Windows.Forms.Label();
-            this.keyMinComboBox = new System.Windows.Forms.ComboBox();
-            this.controlKeyMinCheckBox = new System.Windows.Forms.CheckBox();
-            this.shiftKeyMinCheckBox = new System.Windows.Forms.CheckBox();
-            this.altKeyMinCheckBox = new System.Windows.Forms.CheckBox();
+            this.keyMinTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.resetButton = new System.Windows.Forms.Button();
             this.ecsNotifyMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -85,10 +80,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.currentKeyLabel);
-            this.groupBox1.Controls.Add(this.keyComboBox);
-            this.groupBox1.Controls.Add(this.controlKeyCheckBox);
-            this.groupBox1.Controls.Add(this.shiftKeyCheckBox);
-            this.groupBox1.Controls.Add(this.altKeyCheckBox);
+            this.groupBox1.Controls.Add(this.keyTextBox);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(233, 58);
@@ -105,79 +97,19 @@
             this.currentKeyLabel.TabIndex = 12;
             this.currentKeyLabel.Text = "Test";
             // 
-            // keyComboBox
+            // keyTextBox
             // 
-            this.keyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.keyComboBox.FormattingEnabled = true;
-            this.keyComboBox.Items.AddRange(new object[] {
-            System.Windows.Forms.Keys.A,
-            System.Windows.Forms.Keys.B,
-            System.Windows.Forms.Keys.C,
-            System.Windows.Forms.Keys.D,
-            System.Windows.Forms.Keys.E,
-            System.Windows.Forms.Keys.F,
-            System.Windows.Forms.Keys.G,
-            System.Windows.Forms.Keys.H,
-            System.Windows.Forms.Keys.I,
-            System.Windows.Forms.Keys.J,
-            System.Windows.Forms.Keys.K,
-            System.Windows.Forms.Keys.L,
-            System.Windows.Forms.Keys.M,
-            System.Windows.Forms.Keys.N,
-            System.Windows.Forms.Keys.O,
-            System.Windows.Forms.Keys.P,
-            System.Windows.Forms.Keys.Q,
-            System.Windows.Forms.Keys.R,
-            System.Windows.Forms.Keys.S,
-            System.Windows.Forms.Keys.T,
-            System.Windows.Forms.Keys.U,
-            System.Windows.Forms.Keys.V,
-            System.Windows.Forms.Keys.W,
-            System.Windows.Forms.Keys.X,
-            System.Windows.Forms.Keys.Y,
-            System.Windows.Forms.Keys.Z});
-            this.keyComboBox.Location = new System.Drawing.Point(181, 17);
-            this.keyComboBox.Name = "keyComboBox";
-            this.keyComboBox.Size = new System.Drawing.Size(38, 21);
-            this.keyComboBox.TabIndex = 10;
-            // 
-            // controlKeyCheckBox
-            // 
-            this.controlKeyCheckBox.AutoSize = true;
-            this.controlKeyCheckBox.Location = new System.Drawing.Point(58, 19);
-            this.controlKeyCheckBox.Name = "controlKeyCheckBox";
-            this.controlKeyCheckBox.Size = new System.Drawing.Size(54, 17);
-            this.controlKeyCheckBox.TabIndex = 9;
-            this.controlKeyCheckBox.Text = "CTRL";
-            this.controlKeyCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // shiftKeyCheckBox
-            // 
-            this.shiftKeyCheckBox.AutoSize = true;
-            this.shiftKeyCheckBox.Location = new System.Drawing.Point(118, 19);
-            this.shiftKeyCheckBox.Name = "shiftKeyCheckBox";
-            this.shiftKeyCheckBox.Size = new System.Drawing.Size(57, 17);
-            this.shiftKeyCheckBox.TabIndex = 8;
-            this.shiftKeyCheckBox.Text = "SHIFT";
-            this.shiftKeyCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // altKeyCheckBox
-            // 
-            this.altKeyCheckBox.AutoSize = true;
-            this.altKeyCheckBox.Location = new System.Drawing.Point(6, 19);
-            this.altKeyCheckBox.Name = "altKeyCheckBox";
-            this.altKeyCheckBox.Size = new System.Drawing.Size(46, 17);
-            this.altKeyCheckBox.TabIndex = 7;
-            this.altKeyCheckBox.Text = "ALT";
-            this.altKeyCheckBox.UseVisualStyleBackColor = true;
+            this.keyTextBox.Location = new System.Drawing.Point(6, 19);
+            this.keyTextBox.Name = "keyTextBox";
+            this.keyTextBox.ReadOnly = true;
+            this.keyTextBox.Size = new System.Drawing.Size(221, 20);
+            this.keyTextBox.TabIndex = 14;
+            this.keyTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyTextBox_KeyDown);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.currentKeyMinLabel);
-            this.groupBox2.Controls.Add(this.keyMinComboBox);
-            this.groupBox2.Controls.Add(this.controlKeyMinCheckBox);
-            this.groupBox2.Controls.Add(this.shiftKeyMinCheckBox);
-            this.groupBox2.Controls.Add(this.altKeyMinCheckBox);
+            this.groupBox2.Controls.Add(this.keyMinTextBox);
             this.groupBox2.Location = new System.Drawing.Point(12, 76);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(233, 58);
@@ -194,76 +126,19 @@
             this.currentKeyMinLabel.TabIndex = 12;
             this.currentKeyMinLabel.Text = "Test";
             // 
-            // keyMinComboBox
+            // keyMinTextBox
             // 
-            this.keyMinComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.keyMinComboBox.FormattingEnabled = true;
-            this.keyMinComboBox.Items.AddRange(new object[] {
-            System.Windows.Forms.Keys.A,
-            System.Windows.Forms.Keys.B,
-            System.Windows.Forms.Keys.C,
-            System.Windows.Forms.Keys.D,
-            System.Windows.Forms.Keys.E,
-            System.Windows.Forms.Keys.F,
-            System.Windows.Forms.Keys.G,
-            System.Windows.Forms.Keys.H,
-            System.Windows.Forms.Keys.I,
-            System.Windows.Forms.Keys.J,
-            System.Windows.Forms.Keys.K,
-            System.Windows.Forms.Keys.L,
-            System.Windows.Forms.Keys.M,
-            System.Windows.Forms.Keys.N,
-            System.Windows.Forms.Keys.O,
-            System.Windows.Forms.Keys.P,
-            System.Windows.Forms.Keys.Q,
-            System.Windows.Forms.Keys.R,
-            System.Windows.Forms.Keys.S,
-            System.Windows.Forms.Keys.T,
-            System.Windows.Forms.Keys.U,
-            System.Windows.Forms.Keys.V,
-            System.Windows.Forms.Keys.W,
-            System.Windows.Forms.Keys.X,
-            System.Windows.Forms.Keys.Y,
-            System.Windows.Forms.Keys.Z});
-            this.keyMinComboBox.Location = new System.Drawing.Point(181, 17);
-            this.keyMinComboBox.Name = "keyMinComboBox";
-            this.keyMinComboBox.Size = new System.Drawing.Size(38, 21);
-            this.keyMinComboBox.TabIndex = 10;
-            // 
-            // controlKeyMinCheckBox
-            // 
-            this.controlKeyMinCheckBox.AutoSize = true;
-            this.controlKeyMinCheckBox.Location = new System.Drawing.Point(58, 19);
-            this.controlKeyMinCheckBox.Name = "controlKeyMinCheckBox";
-            this.controlKeyMinCheckBox.Size = new System.Drawing.Size(54, 17);
-            this.controlKeyMinCheckBox.TabIndex = 9;
-            this.controlKeyMinCheckBox.Text = "CTRL";
-            this.controlKeyMinCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // shiftKeyMinCheckBox
-            // 
-            this.shiftKeyMinCheckBox.AutoSize = true;
-            this.shiftKeyMinCheckBox.Location = new System.Drawing.Point(118, 19);
-            this.shiftKeyMinCheckBox.Name = "shiftKeyMinCheckBox";
-            this.shiftKeyMinCheckBox.Size = new System.Drawing.Size(57, 17);
-            this.shiftKeyMinCheckBox.TabIndex = 8;
-            this.shiftKeyMinCheckBox.Text = "SHIFT";
-            this.shiftKeyMinCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // altKeyMinCheckBox
-            // 
-            this.altKeyMinCheckBox.AutoSize = true;
-            this.altKeyMinCheckBox.Location = new System.Drawing.Point(6, 19);
-            this.altKeyMinCheckBox.Name = "altKeyMinCheckBox";
-            this.altKeyMinCheckBox.Size = new System.Drawing.Size(46, 17);
-            this.altKeyMinCheckBox.TabIndex = 7;
-            this.altKeyMinCheckBox.Text = "ALT";
-            this.altKeyMinCheckBox.UseVisualStyleBackColor = true;
+            this.keyMinTextBox.Location = new System.Drawing.Point(6, 16);
+            this.keyMinTextBox.Name = "keyMinTextBox";
+            this.keyMinTextBox.ReadOnly = true;
+            this.keyMinTextBox.Size = new System.Drawing.Size(221, 20);
+            this.keyMinTextBox.TabIndex = 13;
+            this.keyMinTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyMinTextBox_KeyDown);
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(251, 31);
+            this.button1.Location = new System.Drawing.Point(251, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 85);
             this.button1.TabIndex = 9;
@@ -271,11 +146,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
+            // resetButton
+            // 
+            this.resetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetButton.Location = new System.Drawing.Point(251, 109);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(75, 24);
+            this.resetButton.TabIndex = 10;
+            this.resetButton.Text = "Reset";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
+            // 
             // EveClientSwitcherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(339, 146);
+            this.Controls.Add(this.resetButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -304,18 +191,12 @@
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label currentKeyLabel;
-        private System.Windows.Forms.ComboBox keyComboBox;
-        private System.Windows.Forms.CheckBox controlKeyCheckBox;
-        private System.Windows.Forms.CheckBox shiftKeyCheckBox;
-        private System.Windows.Forms.CheckBox altKeyCheckBox;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label currentKeyMinLabel;
-        private System.Windows.Forms.ComboBox keyMinComboBox;
-        private System.Windows.Forms.CheckBox controlKeyMinCheckBox;
-        private System.Windows.Forms.CheckBox shiftKeyMinCheckBox;
-        private System.Windows.Forms.CheckBox altKeyMinCheckBox;
         private System.Windows.Forms.Button button1;
-
+        private System.Windows.Forms.TextBox keyMinTextBox;
+        private System.Windows.Forms.TextBox keyTextBox;
+        private System.Windows.Forms.Button resetButton;
     }
 }
 

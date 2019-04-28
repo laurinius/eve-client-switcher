@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
@@ -80,79 +74,47 @@ namespace EveClientSwitcher
         }
 
         private PROPS activeProps;
+        private PROPS standbyProps;
 
-        private void RegisterKeySwitch(int hotkey, int modifier, Keys key)
+        private string GetKeyString(int modifier, Keys key)
         {
-            UnregisterKey(hotkey);
-            string keyString = "";
-            if ((modifier & (1 << 0)) == MOD_ALT)
-            {
-                this.altKeyCheckBox.Checked = true;
-                keyString += "ALT + ";
-            }
-            else
-            {
-                this.altKeyCheckBox.Checked = false;
-            }
-            if ((modifier & (1 << 1)) == MOD_CONTROL)
-            {
-                this.controlKeyCheckBox.Checked = true;
-                keyString += "CTRL + ";
-            }
-            else
-            {
-                this.controlKeyCheckBox.Checked = false;
-            }
-            if ((modifier & (1 << 2)) == MOD_SHIFT)
-            {
-                this.shiftKeyCheckBox.Checked = true;
-                keyString += "SHIFT + ";
-            }
-            else
-            {
-                this.shiftKeyCheckBox.Checked = false;
-            }
+            string keyString = GetKeyString(modifier);
             keyString += key;
-            this.keyComboBox.SelectedItem = key;
-            this.currentKeyLabel.Text = keyString;
-            RegisterHotKey(this.Handle, hotkey, modifier, (int)key);
+            return keyString;
         }
 
-        private void RegisterKeyMinimize(int hotkey, int modifier, Keys key)
+        private string GetKeyString(int modifier)
         {
-            UnregisterKey(hotkey);
             string keyString = "";
             if ((modifier & (1 << 0)) == MOD_ALT)
             {
-                this.altKeyMinCheckBox.Checked = true;
                 keyString += "ALT + ";
-            }
-            else
-            {
-                this.altKeyMinCheckBox.Checked = false;
             }
             if ((modifier & (1 << 1)) == MOD_CONTROL)
             {
-                this.controlKeyMinCheckBox.Checked = true;
                 keyString += "CTRL + ";
-            }
-            else
-            {
-                this.controlKeyMinCheckBox.Checked = false;
             }
             if ((modifier & (1 << 2)) == MOD_SHIFT)
             {
-                this.shiftKeyMinCheckBox.Checked = true;
                 keyString += "SHIFT + ";
             }
-            else
+            return keyString;
+        }
+
+        private void RegisterKey(int hotkey)
+        {
+            UnregisterKey(hotkey);
+            if (hotkey == HK_SWITCH)
             {
-                this.shiftKeyMinCheckBox.Checked = false;
+                this.currentKeyLabel.Text = GetKeyString(activeProps.switchModifier, activeProps.switchKey);
+                this.keyTextBox.Text = GetKeyString(activeProps.switchModifier, activeProps.switchKey);
+                RegisterHotKey(this.Handle, hotkey, activeProps.switchModifier, (int)activeProps.switchKey);
+            } else if (hotkey == HK_MINIMIZE)
+            {
+                this.currentKeyMinLabel.Text = GetKeyString(activeProps.minimizeModifier, activeProps.minimizeKey);
+                this.keyMinTextBox.Text = GetKeyString(activeProps.minimizeModifier, activeProps.minimizeKey);
+                RegisterHotKey(this.Handle, hotkey, activeProps.minimizeModifier, (int)activeProps.minimizeKey);
             }
-            keyString += key;
-            this.keyMinComboBox.SelectedItem = key;
-            this.currentKeyMinLabel.Text = keyString;
-            RegisterHotKey(this.Handle, hotkey, modifier, (int)key);
         }
 
         private void UnregisterKey(int hotkey)
@@ -163,8 +125,11 @@ namespace EveClientSwitcher
         private void EveClientSwitcherForm_Load(object sender, EventArgs e)
         {
             activeProps = ReadProps();
-            RegisterKeySwitch(HK_SWITCH, activeProps.switchModifier, activeProps.switchKey);
-            RegisterKeyMinimize(HK_MINIMIZE, activeProps.minimizeModifier, activeProps.minimizeKey);
+            standbyProps = CopyProps(activeProps);
+            RegisterKey(HK_SWITCH);
+            RegisterKey(HK_MINIMIZE);
+            keyTextBox.Text = GetKeyString(activeProps.switchModifier, activeProps.switchKey);
+            keyMinTextBox.Text = GetKeyString(activeProps.minimizeModifier, activeProps.minimizeKey);
             this.Hide();
         }
 
@@ -196,44 +161,19 @@ namespace EveClientSwitcher
             }
         }
 
-        private void SetAndSaveSwitch() {
-            int modifier = 0;
-            if (this.altKeyCheckBox.Checked)
-            {
-                modifier += MOD_ALT;
-            }
-            if (this.controlKeyCheckBox.Checked)
-            {
-                modifier += MOD_CONTROL;
-            }
-            if (this.shiftKeyCheckBox.Checked)
-            {
-                modifier += MOD_SHIFT;
-            }
-            activeProps.switchKey = (Keys)this.keyComboBox.SelectedItem;
-            activeProps.switchModifier = modifier;
-            RegisterKeySwitch(HK_SWITCH, activeProps.switchModifier, activeProps.switchKey);
+        private void SetAndSaveSwitch()
+        {
+            activeProps.switchModifier = standbyProps.switchModifier;
+            activeProps.switchKey = standbyProps.switchKey;
+            RegisterKey(HK_SWITCH);
             SaveProps(activeProps);
         }
 
         private void SetAndSaveMinimize()
         {
-            int modifier = 0;
-            if (this.altKeyMinCheckBox.Checked)
-            {
-                modifier += MOD_ALT;
-            }
-            if (this.controlKeyMinCheckBox.Checked)
-            {
-                modifier += MOD_CONTROL;
-            }
-            if (this.shiftKeyMinCheckBox.Checked)
-            {
-                modifier += MOD_SHIFT;
-            }
-            activeProps.minimizeKey = (Keys)this.keyMinComboBox.SelectedItem;
-            activeProps.minimizeModifier = modifier;
-            RegisterKeyMinimize(HK_MINIMIZE, activeProps.minimizeModifier, activeProps.minimizeKey);
+            activeProps.minimizeModifier = standbyProps.minimizeModifier;
+            activeProps.minimizeKey = standbyProps.minimizeKey;
+            RegisterKey(HK_MINIMIZE);
             SaveProps(activeProps);
         }
 
@@ -353,9 +293,114 @@ namespace EveClientSwitcher
             public Keys minimizeKey;
         }
 
+        private PROPS CopyProps(PROPS props)
+        {
+            return new PROPS()
+            {
+                minimizeModifier = props.minimizeModifier,
+                minimizeKey = props.minimizeKey,
+                switchModifier = props.switchModifier,
+                switchKey = props.switchKey
+            };
+        }
+
         private void Button1_Click(object sender, EventArgs e)
         {
             SetAndSave();
+        }
+
+        private int ConvertModifier(Keys modifierKeys)
+        {
+            int modifier = 0;
+            if ((modifierKeys & Keys.Shift) == Keys.Shift)
+            {
+                modifier += MOD_SHIFT;
+            }
+            if ((modifierKeys & Keys.Control) == Keys.Control)
+            {
+                modifier += MOD_CONTROL;
+            }
+            if ((modifierKeys & Keys.Alt) == Keys.Alt)
+            {
+                modifier += MOD_ALT;
+            }
+            return modifier;
+        }
+
+        Keys[] invalidKeys = new[] { Keys.LMenu, Keys.RMenu, Keys.LShiftKey, Keys.RShiftKey, Keys.LControlKey, Keys.RControlKey,
+            Keys.LWin, Keys.RWin, Keys.Apps, Keys.LaunchApplication1, Keys.LaunchApplication2 };
+
+        Keys[] modifierKeys = new[] { Keys.Menu, Keys.ShiftKey, Keys.ControlKey };
+
+        private Boolean IsValidKey(Keys key)
+        {
+            return !invalidKeys.Contains(key);
+        }
+
+        private Boolean IsOnlyModifierKey(Keys key)
+        {
+            return key == Keys.None || modifierKeys.Contains(key);
+        }
+
+        private void KeyMinTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            Keys modifierKeys = e.Modifiers;
+            Keys pressedKey = e.KeyData ^ modifierKeys;
+            
+                standbyProps.minimizeModifier = activeProps.minimizeModifier;
+                standbyProps.minimizeKey = activeProps.minimizeKey;
+
+            if (IsOnlyModifierKey(pressedKey))
+            {
+                int modifier = ConvertModifier(ModifierKeys);
+                keyMinTextBox.Text = GetKeyString(modifier);
+            }
+            else if (IsValidKey(pressedKey))
+            {
+                int modifier = ConvertModifier(ModifierKeys);
+                standbyProps.minimizeModifier = modifier;
+                standbyProps.minimizeKey = pressedKey;
+                keyMinTextBox.Text = GetKeyString(modifier, pressedKey);
+            }
+            else
+            {
+                keyMinTextBox.Text = "> Invalid key <";
+            }
+            e.Handled = true;
+        }
+
+        private void KeyTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            Keys modifierKeys = e.Modifiers;
+            Keys pressedKey = e.KeyData ^ modifierKeys;
+
+            standbyProps.switchModifier = activeProps.switchModifier;
+            standbyProps.switchKey = activeProps.switchKey;
+
+            if (IsOnlyModifierKey(pressedKey))
+            {
+                int modifier = ConvertModifier(ModifierKeys);
+                keyTextBox.Text = GetKeyString(modifier);
+            }
+            else if (IsValidKey(pressedKey))
+            {
+                int modifier = ConvertModifier(ModifierKeys);
+                standbyProps.switchModifier = modifier;
+                standbyProps.switchKey = pressedKey;
+                keyTextBox.Text = GetKeyString(modifier, pressedKey);
+            }
+            else
+            {
+                keyTextBox.Text = "> Invalid key <";
+            }
+            e.Handled = true;
+        }
+
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            standbyProps = CopyProps(activeProps);
+            keyTextBox.Text = GetKeyString(activeProps.switchModifier, activeProps.switchKey);
+            keyMinTextBox.Text = GetKeyString(activeProps.minimizeModifier, activeProps.minimizeKey);
         }
     }
 }
