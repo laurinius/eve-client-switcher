@@ -35,12 +35,12 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.currentKeyLabel = new System.Windows.Forms.Label();
-            this.keyTextBox = new System.Windows.Forms.TextBox();
+            this.activeSwitchKeyLabel = new System.Windows.Forms.Label();
+            this.switchKeyTextBox = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.currentKeyMinLabel = new System.Windows.Forms.Label();
-            this.keyMinTextBox = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.activeMinimizeKeyLabel = new System.Windows.Forms.Label();
+            this.minimizeKeyTextBox = new System.Windows.Forms.TextBox();
+            this.saveButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
             this.ecsNotifyMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -79,8 +79,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.currentKeyLabel);
-            this.groupBox1.Controls.Add(this.keyTextBox);
+            this.groupBox1.Controls.Add(this.activeSwitchKeyLabel);
+            this.groupBox1.Controls.Add(this.switchKeyTextBox);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(233, 58);
@@ -88,28 +88,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Switch EVE Window";
             // 
-            // currentKeyLabel
+            // activeSwitchKeyLabel
             // 
-            this.currentKeyLabel.AutoSize = true;
-            this.currentKeyLabel.Location = new System.Drawing.Point(6, 39);
-            this.currentKeyLabel.Name = "currentKeyLabel";
-            this.currentKeyLabel.Size = new System.Drawing.Size(28, 13);
-            this.currentKeyLabel.TabIndex = 12;
-            this.currentKeyLabel.Text = "Test";
+            this.activeSwitchKeyLabel.AutoSize = true;
+            this.activeSwitchKeyLabel.Location = new System.Drawing.Point(6, 39);
+            this.activeSwitchKeyLabel.Name = "activeSwitchKeyLabel";
+            this.activeSwitchKeyLabel.Size = new System.Drawing.Size(28, 13);
+            this.activeSwitchKeyLabel.TabIndex = 12;
+            this.activeSwitchKeyLabel.Text = "Test";
             // 
-            // keyTextBox
+            // switchKeyTextBox
             // 
-            this.keyTextBox.Location = new System.Drawing.Point(6, 19);
-            this.keyTextBox.Name = "keyTextBox";
-            this.keyTextBox.ReadOnly = true;
-            this.keyTextBox.Size = new System.Drawing.Size(221, 20);
-            this.keyTextBox.TabIndex = 14;
-            this.keyTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyTextBox_KeyDown);
+            this.switchKeyTextBox.Location = new System.Drawing.Point(6, 19);
+            this.switchKeyTextBox.Name = "switchKeyTextBox";
+            this.switchKeyTextBox.ReadOnly = true;
+            this.switchKeyTextBox.Size = new System.Drawing.Size(221, 20);
+            this.switchKeyTextBox.TabIndex = 14;
+            this.switchKeyTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyTextBox_KeyDown);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.currentKeyMinLabel);
-            this.groupBox2.Controls.Add(this.keyMinTextBox);
+            this.groupBox2.Controls.Add(this.activeMinimizeKeyLabel);
+            this.groupBox2.Controls.Add(this.minimizeKeyTextBox);
             this.groupBox2.Location = new System.Drawing.Point(12, 76);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(233, 58);
@@ -117,34 +117,34 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Minimze All EVE Windows";
             // 
-            // currentKeyMinLabel
+            // activeMinimizeKeyLabel
             // 
-            this.currentKeyMinLabel.AutoSize = true;
-            this.currentKeyMinLabel.Location = new System.Drawing.Point(6, 39);
-            this.currentKeyMinLabel.Name = "currentKeyMinLabel";
-            this.currentKeyMinLabel.Size = new System.Drawing.Size(28, 13);
-            this.currentKeyMinLabel.TabIndex = 12;
-            this.currentKeyMinLabel.Text = "Test";
+            this.activeMinimizeKeyLabel.AutoSize = true;
+            this.activeMinimizeKeyLabel.Location = new System.Drawing.Point(6, 39);
+            this.activeMinimizeKeyLabel.Name = "activeMinimizeKeyLabel";
+            this.activeMinimizeKeyLabel.Size = new System.Drawing.Size(28, 13);
+            this.activeMinimizeKeyLabel.TabIndex = 12;
+            this.activeMinimizeKeyLabel.Text = "Test";
             // 
-            // keyMinTextBox
+            // minimizeKeyTextBox
             // 
-            this.keyMinTextBox.Location = new System.Drawing.Point(6, 16);
-            this.keyMinTextBox.Name = "keyMinTextBox";
-            this.keyMinTextBox.ReadOnly = true;
-            this.keyMinTextBox.Size = new System.Drawing.Size(221, 20);
-            this.keyMinTextBox.TabIndex = 13;
-            this.keyMinTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyMinTextBox_KeyDown);
+            this.minimizeKeyTextBox.Location = new System.Drawing.Point(6, 16);
+            this.minimizeKeyTextBox.Name = "minimizeKeyTextBox";
+            this.minimizeKeyTextBox.ReadOnly = true;
+            this.minimizeKeyTextBox.Size = new System.Drawing.Size(221, 20);
+            this.minimizeKeyTextBox.TabIndex = 13;
+            this.minimizeKeyTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyMinTextBox_KeyDown);
             // 
-            // button1
+            // saveButton
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(251, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 85);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Set\r\n&&\r\nSave";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.Location = new System.Drawing.Point(251, 19);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 85);
+            this.saveButton.TabIndex = 9;
+            this.saveButton.Text = "Set\r\n&&\r\nSave";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // resetButton
             // 
@@ -163,7 +163,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(339, 146);
             this.Controls.Add(this.resetButton);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -190,12 +190,12 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label currentKeyLabel;
+        private System.Windows.Forms.Label activeSwitchKeyLabel;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label currentKeyMinLabel;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox keyMinTextBox;
-        private System.Windows.Forms.TextBox keyTextBox;
+        private System.Windows.Forms.Label activeMinimizeKeyLabel;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.TextBox minimizeKeyTextBox;
+        private System.Windows.Forms.TextBox switchKeyTextBox;
         private System.Windows.Forms.Button resetButton;
     }
 }
