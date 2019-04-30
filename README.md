@@ -1,6 +1,6 @@
 # EVE Client Switcher
 
-[Download](https://github.com/laurinius/eve-client-switcher/releases/download/v1.0/EveClientSwitcher.v1.0.zip)
+[Download](https://github.com/laurinius/eve-client-switcher/releases/download/v1.1/EveClientSwitcher.v1.1.zip)
 
 1 - About EVE Client Switcher
 ----------------------
